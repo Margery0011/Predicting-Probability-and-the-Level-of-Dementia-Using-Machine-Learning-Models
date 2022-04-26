@@ -207,10 +207,42 @@ plt.show()
 
 
 ## Logistic Regression
-### Tune
+
+![image](https://user-images.githubusercontent.com/89502586/165407836-f496773a-a0b5-4296-9f40-f9ebadf98c25.png)
+
+#### Find the best Threshold
+
+![image](https://user-images.githubusercontent.com/89502586/165407880-368c50ef-86d3-4188-8be6-00f5faa0d445.png)
+![4181651015004_ pic](https://user-images.githubusercontent.com/89502586/165407964-c34f3c63-ddb1-4897-ac6f-226c4b2693db.jpg)
+
+
+
 ### Performance
 
+#### Default Threshold
+
+![image](https://user-images.githubusercontent.com/89502586/165408103-51ecc7fc-1a3f-43fc-ae70-b3a03cc95ed1.png)
+![image](https://user-images.githubusercontent.com/89502586/165408114-359041fb-840a-4959-ab6f-0239be9b8f59.png)
+
+#### Best Threshold
+
+![image](https://user-images.githubusercontent.com/89502586/165408400-08f65cfe-3d06-474a-ac7e-55e4b07615a3.png)
+![image](https://user-images.githubusercontent.com/89502586/165408411-0815dfd4-d45f-4853-b7ee-b21a3bd6914a.png)
+
+
 # Multi-labels Classification
+
+## Imblanced Data
+![image](https://user-images.githubusercontent.com/89502586/165408453-16cd788c-6085-4e0b-93df-16d95fdf502e.png)
+### Oversample
+
+```
+from imblearn.over_sampling import SMOTE
+oversample =SMOTE()
+X_re,Y_re = oversample.fit_resample(X_train,Y_train)
+Y_reD = pd.DataFrame(Y_re, columns = ['CDR'])
+```
+
 ## Algorithem Comparison 
 ## Performance
 ### Future  Study   
