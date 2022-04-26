@@ -95,6 +95,13 @@ imputer = SimpleImputer ( missing_values = np.nan,strategy='median')
 imputer.fit(data_cp[['MMSE']])
 data_cp[['MMSE']] = imputer.fit_transform(data_cp[['MMSE']])
 ```
+Change  "Gender" from categorical data to numerica data
+
+```
+gender_map = {'M':0, 'F':1}
+data_cp['Gender'] = data_cp['M/F'].map(gender_map)
+data_cp.drop(['M/F'],axis=1,inplace= True)
+```
 ## Data Explore
 
 # Binary Classification
