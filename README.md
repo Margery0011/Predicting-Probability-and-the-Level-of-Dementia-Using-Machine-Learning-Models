@@ -18,6 +18,18 @@ Longitudinal dataset  consists of a longitudinal collection of 373 subjects aged
 
 After concating , there are 809 subjects in total.
 
+## Inputs(Features) and Outputs(Targets)
+Features	Description
+EDUC	Years of Education
+SES	Socioeconomic Status
+MMSE	Mini Mental State Examination
+ASF	Atlas Scaling Factor
+eTIV	Estimated Total Intracranial Volume
+nWBV	Normalize Whole Brain Volume
+Gender	Male/Female 
+Age	18 years old ~ 96 years old ![image](https://user-images.githubusercontent.com/89502586/165232634-64bdcfd7-adad-48a7-8118-d88aa4c06c3e.png)
+
+
 ## Data Pre-process
 ## Data Explore
 
