@@ -119,7 +119,7 @@ data_bi.loc[:,'CDR'] = data_bi.loc[:, 'CDR'].apply(lambda x: ClassDict[x])
 
 #### Age Group & Dementia
 
-![image](https://user-images.githubusercontent.com/89502586/165405580-073aa06d-74ed-4027-ae21-8e92332bb484.png)
+![image](https://user-images.githubusercontent.com/89502586/165406754-591e9bfa-c521-409f-8487-4201a948b3c0.png)
 
 Majority of cases of Dementia are in the age group of 70-80 years (around 45%) while second most highest cases are in 80-90 years of age.
 
@@ -171,9 +171,41 @@ plt.show();
 ![image](https://user-images.githubusercontent.com/89502586/165406555-bf6348d6-d2b0-490c-9455-9fd2de892e54.png)
 
 
-## RandomForest 
-### RandomForest Classifier Tuning
+## RandomForest Classifier Tuning
+
+### Find best n_estimator
+
+```
+scorel = []
+for i in range(1,100):
+    rfc = RandomForestClassifier(n_estimators=i,
+                                 n_jobs=-1,
+                                 random_state=42)
+    score = cross_val_score(rfc,X_bi, Y_bi,cv=3).mean()
+    scorel.append(score)
+
+print(max(scorel),([*range(1,100)][scorel.index(max(scorel))]))
+plt.figure(figsize=[20,5])
+plt.plot(range(1,100),scorel)
+plt.xlabel("n_estimator")
+plt.ylabel("accuracy")
+plt.show()
+```
+![image](https://user-images.githubusercontent.com/89502586/165406929-78765508-e89c-460d-8457-4c4ceb7e1e49.png)
+
+#### Other paramters
+
+![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
+
 ### Performance
+
+![image](https://user-images.githubusercontent.com/89502586/165407510-322ad932-a68f-4efe-8900-8beed17734ce.png)
+
+![4171651014733_ pic](https://user-images.githubusercontent.com/89502586/165407572-b56ca5b4-621b-4103-b439-8d6a47636af7.jpg)
+
+![image](https://user-images.githubusercontent.com/89502586/165407612-7d1620be-6837-4c7a-b798-187b9cbb68b4.png)
+
+
 ## Logistic Regression
 ### Tune
 ### Performance
