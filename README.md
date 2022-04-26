@@ -125,7 +125,7 @@ Majority of cases of Dementia are in the age group of 70-80 years (around 45%) w
 
 #### Gender & Dementia
 
-![image](https://user-images.githubusercontent.com/89502586/165405435-3bb0ba94-f92f-46e6-9ecd-c00d23178c5c.png)
+![image](https://user-images.githubusercontent.com/89502586/165406003-65f9fd84-37c1-434c-af10-6dad0a47a990.png)
 
 For Male, most number of dementia cases are reported in the age of around 80 .
 For Female, dementia is prevalent in 70 years of Age.Most of the cases happens generally after 65 years of age
@@ -138,6 +138,39 @@ It is basically a balanced data which does not need re-sample
 
 
 ## Algorithem Comparison
+
+### cross_val_score
+
+```
+models = []
+models.append(('LR', LogisticRegression()))
+models.append(('KNN', KNeighborsClassifier()))
+models.append(('CART', DecisionTreeClassifier()))
+models.append(('RFC', RandomForestClassifier()))
+results = []
+names = []
+print('(', 'Model, ', 'Cross-Validation Accuracy: Mean, Stdev',')')
+for name, model in models:
+    kfold = KFold(n_splits=3, random_state = seed,shuffle=True)
+    cv_results = cross_val_score(model, X_train_bi_sc, Y_train_bi, cv=kfold, scoring='accuracy')
+    results.append(cv_results)
+    names.append(name)
+    msg = (name, format(cv_results.mean(), '.2f'))
+    print(msg)
+# Compare Algorithms
+fig = plt.figure()
+fig.suptitle('Algorithm Comparison')
+ax = fig.add_subplot(111)
+plt.boxplot(results)
+plt.xlabel("different classifier")
+plt.ylabel("Accuracy score")
+ax.set_xticklabels(names)
+plt.show();
+```
+
+![image](https://user-images.githubusercontent.com/89502586/165406555-bf6348d6-d2b0-490c-9455-9fd2de892e54.png)
+
+
 ## RandomForest 
 ### RandomForest Classifier Tuning
 ### Performance
