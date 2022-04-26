@@ -19,18 +19,28 @@ Longitudinal dataset  consists of a longitudinal collection of 373 subjects aged
 After concating , there are 809 subjects in total.
 
 ## Inputs(Features) and Outputs(Targets)
-Features	Description
-EDUC	Years of Education
-SES	Socioeconomic Status
-MMSE	Mini Mental State Examination
-ASF	Atlas Scaling Factor
-eTIV	Estimated Total Intracranial Volume
-nWBV	Normalize Whole Brain Volume
-Gender	Male/Female 
-Age	18 years old ~ 96 years old ![image](https://user-images.githubusercontent.com/89502586/165232634-64bdcfd7-adad-48a7-8118-d88aa4c06c3e.png)
+
+I am using 8 features as input and CDR as the output to train these models, the descriptions are summaried in the table below.
+
+![image](https://user-images.githubusercontent.com/89502586/165397913-37a0b439-f19c-40f4-a337-a960c35ddec8.png)
+
 
 
 ## Data Pre-process
+### Data Clean
+
+- Unnecessary data removal:
+  - Rows missing CDR value (608 subjects remained)
+  - ASF column : Because it is almost correlated with factor eTIV (99%)	
+  ![image](https://user-images.githubusercontent.com/89502586/165398227-378edec8-aa57-49a4-ab78-e1d4080ef23e.png)
+
+  - Hand column: All right-handed, not representative
+- Missing values imputer
+  - SES 
+  ![image](https://user-images.githubusercontent.com/89502586/165398389-62587e41-1e1e-4f41-ba7b-c6b9871b2b33.png)
+  - MMSE
+  ![image](https://user-images.githubusercontent.com/89502586/165398437-b79cda66-2532-4dcb-b5b0-650067707739.png)
+
 ## Data Explore
 
 # Binary Classification
