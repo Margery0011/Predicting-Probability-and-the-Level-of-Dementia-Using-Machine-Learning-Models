@@ -102,9 +102,41 @@ gender_map = {'M':0, 'F':1}
 data_cp['Gender'] = data_cp['M/F'].map(gender_map)
 data_cp.drop(['M/F'],axis=1,inplace= True)
 ```
-## Data Explore
+
 
 # Binary Classification
+
+To predict whether this individual has dementia by Binary classifier, if the outout of target is 0 means "CDR = 0" and this individual is "Non-Dementia" , if the outout of target is 1 means "CDR > 0" and this individual is "Dementia" 
+
+```
+data_cp['CDR'] = data_cp['CDR'].astype(str)
+data_cp['CDR'] = data_cp['CDR'].str.replace('2','1')
+data_bi = data_cp.copy()
+ClassDict = {'0.0':0,'0.5':1,'1.0':1}
+data_bi.loc[:,'CDR'] = data_bi.loc[:, 'CDR'].apply(lambda x: ClassDict[x])
+```
+## Data Explore
+
+#### Age Group & Dementia
+
+![image](https://user-images.githubusercontent.com/89502586/165405580-073aa06d-74ed-4027-ae21-8e92332bb484.png)
+
+Majority of cases of Dementia are in the age group of 70-80 years (around 45%) while second most highest cases are in 80-90 years of age.
+
+#### Gender & Dementia
+
+![image](https://user-images.githubusercontent.com/89502586/165405435-3bb0ba94-f92f-46e6-9ecd-c00d23178c5c.png)
+
+For Male, most number of dementia cases are reported in the age of around 80 .
+For Female, dementia is prevalent in 70 years of Age.Most of the cases happens generally after 65 years of age
+
+#### Balanced / Imbalanced
+
+![image](https://user-images.githubusercontent.com/89502586/165405749-2b8ce36d-8acb-4a5a-b7d5-703334df50f6.png)
+
+It is basically a balanced data which does not need re-sample
+
+
 ## Algorithem Comparison
 ## RandomForest 
 ### RandomForest Classifier Tuning
