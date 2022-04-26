@@ -75,9 +75,26 @@ data = pd.concat([cross_cp,long_cp])
 - Missing values imputer
   - SES 
   ![image](https://user-images.githubusercontent.com/89502586/165398389-62587e41-1e1e-4f41-ba7b-c6b9871b2b33.png)
+  Because SES is discrete data, so use "most_frequent as strategy , and MMSE is not normal distribution， so use "median" as strategy
   - MMSE
   ![image](https://user-images.githubusercontent.com/89502586/165398437-b79cda66-2532-4dcb-b5b0-650067707739.png)
 
+
+```
+data_cp = data.copy()
+# remove ASF column because it is almost correlated with eTIV 
+# remove hand column
+data_cp.drop(['ASF'],axis = 1,inplace = True)
+data_cp.drop(['Hand'],axis = 1,inplace = True)
+imputer = SimpleImputer ( missing_values = np.nan,strategy='most_frequent')
+imputer.fit(data_cp[['SES']])
+data_cp[['SES']] = imputer.fit_transform(data_cp[['SES']])
+
+# missing values imputer 
+imputer = SimpleImputer ( missing_values = np.nan,strategy='median')
+imputer.fit(data_cp[['MMSE']])
+data_cp[['MMSE']] = imputer.fit_transform(data_cp[['MMSE']])
+```
 ## Data Explore
 
 # Binary Classification
