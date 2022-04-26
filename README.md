@@ -27,6 +27,43 @@ I am using 8 features as input and CDR as the output to train these models, the 
 
 
 ## Data Pre-process
+
+### Import Libraries 
+
+```
+import pandas as pd
+import seaborn as sns
+from pylab import rcParams
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.impute  import SimpleImputer
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+```
+### Load 2 Datasets & concat them
+```
+cross = pd.read_csv("oasis_cross-sectional.csv")
+long =  pd.read_csv("oasis_longitudinal.csv")
+cross_cp = cross.copy()
+long_cp = long.copy()
+```
+
+Remove unnecessary columns 
+```
+cross_cp.drop(columns=['ID','Delay'],inplace=True)
+long_cp = long.rename(columns={'EDUC':'Educ'})
+long_cp.drop(columns=['Subject ID','MRI ID','Group','Visit','MR Delay'],inplace=True)
+data = pd.concat([cross_cp,long_cp])
+```
+
 ### Data Clean
 
 - Unnecessary data removal:
