@@ -203,36 +203,61 @@ plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/89502586/165406929-78765508-e89c-460d-8457-4c4ceb7e1e49.png)
 
-#### Other paramters
+#### Hyperparameter Optimization for the RandomForest Model
+
+Use Grid Search to search optimal values for hyperparameters. To tune hyperparameters, follow the steps below:
+
+- Create a model instance of the RandomForest Model
+- Specify hyperparameters with all possible values
+- Define performance evaluation metrics
+- Apply cross-validation
+- Train the model using the training dataset
+- Determine the best values for the hyperparameters given.
 
 **GridSearcgCV()**
 
-It is Exhaustive search method.
-
-After we created a list of hyperparameters dictionary , it will find the optimal paramters among all candidate parameter choices, by looping through, trying every possibility, then the best performing parameter is the final result. 
+It is Exhaustive search method.After we created a list of hyperparameters dictionary , it will find the optimal paramters among all candidate parameter choices, by looping through, trying every possibility, then the best performing parameter is the final result. 
 
 ![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
 
 
-### Performance
+# Model Performance Evaluation
 
-**Model Evaluation Metrics**
+For Binary Classification, the output is either Non-Dementia (0) or Dementia (1)
 
-To evaluate performance ,  “f1 score” as this is a class imbalance problem using accuracy as a performance metrics is not good also, The formula for calculating the F1 score is as follows:
+**Confusion Matrix**
 
-F1 Score = 2*(Recall * Precision) / (Recall + Precision)
+True positive (TP): Prediction is 1 and X is Dementia, we want that
+True negative (TN): Prediction is 0 and X is Non-Dementia, we want that too
+False positive (FP): Prediction is 1 and X is Non-Dementia, false alarm, bad
+False negative (FN): Prediction is 0 and X is Dementia, the worst
 
-Precision is the ratio of accurately predicted positive observations to the total predicted positive observations.
+![4201651030199_ pic](https://user-images.githubusercontent.com/89502586/165434244-72db8671-2710-40d5-861d-ce588368af84.jpg)
 
-Precision = TP/TP+FP
 
-Recall is the ratio of accurately predicted positive observations to all observations in actual class – yes.
 
-Recall = TP/TP+FN
+**Precision**
+
+The ratio of accurately predicted positive observations to the total predicted positive observations.
+
+*Precision = TP/TP+FP*
+
+**Recall**
+
+The ratio of accurately predicted positive observations to all observations in actual class – yes.
+
+**Recall = TP/TP+FN**
+
+**F1 score** 
+
+It is the harmonic mean of precision and recall. It takes both false positive and false negatives into account.F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.
+
+
+*F1 Score = 2*(Recall * Precision) / (Recall + Precision)*
 
  
 
-F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.
+
 ![image](https://user-images.githubusercontent.com/89502586/165407510-322ad932-a68f-4efe-8900-8beed17734ce.png)
 
 ![4171651014733_ pic](https://user-images.githubusercontent.com/89502586/165407572-b56ca5b4-621b-4103-b439-8d6a47636af7.jpg)
@@ -266,12 +291,12 @@ In binary classification, when a model gives us a score instead of the predictio
 ### Performance
 
 
-#### Default Threshold
+#### Logistic Regression Classifier using Default Threshold
 
 ![image](https://user-images.githubusercontent.com/89502586/165408103-51ecc7fc-1a3f-43fc-ae70-b3a03cc95ed1.png)
 ![image](https://user-images.githubusercontent.com/89502586/165408114-359041fb-840a-4959-ab6f-0239be9b8f59.png)
 
-#### Best Threshold
+#### Logistic Regression Classifier using Chosen Threshold
 
 ![image](https://user-images.githubusercontent.com/89502586/165408400-08f65cfe-3d06-474a-ac7e-55e4b07615a3.png)
 ![image](https://user-images.githubusercontent.com/89502586/165408411-0815dfd4-d45f-4853-b7ee-b21a3bd6914a.png)
