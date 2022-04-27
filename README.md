@@ -235,7 +235,8 @@ True negative (TN): Prediction is 0 and X is Non-Dementia, we want that too
 False positive (FP): Prediction is 1 and X is Non-Dementia, false alarm, bad
 False negative (FN): Prediction is 0 and X is Dementia, the worst
 
-![4201651030199_ pic](https://user-images.githubusercontent.com/89502586/165435584-d84e881f-f8ea-4527-9045-09e152a6df16.jpg)
+
+![4211651032026_ pic_hd](https://user-images.githubusercontent.com/89502586/165437849-1afceb55-4b5c-4ae8-a145-fd8518802652.jpg)
 
 
 **Precision**
