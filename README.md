@@ -203,6 +203,8 @@ plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/89502586/165406929-78765508-e89c-460d-8457-4c4ceb7e1e49.png)
 
+The figure shows that when n_estimator = 69 , the model can get best accuracy.
+
 #### Hyperparameter Optimization for the RandomForest Model
 
 Use Grid Search to search optimal values for hyperparameters. To tune hyperparameters, follow the steps below:
@@ -220,7 +222,7 @@ It is Exhaustive search method.After we created a list of hyperparameters dictio
 
 ![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
 
-Then build the classifier using the best parameters selected by grid search
+Then build the classifier using these best parameters selected by grid search.
 
 # Model Performance Evaluation
 
@@ -240,20 +242,22 @@ False negative (FN): Prediction is 0 and X is Dementia, the worst
 
 The ratio of accurately predicted positive observations to the total predicted positive observations.
 
-*Precision = TP/TP+FP*
+Precision = TP/TP+FP
 
 **Recall**
 
 The ratio of accurately predicted positive observations to all observations in actual class – yes.
 
-**Recall = TP/TP+FN**
+Recall = TP/TP+FN
 
 **F1 score** 
 
 It is the harmonic mean of precision and recall. It takes both false positive and false negatives into account.F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.
 
 
-*F1 Score = 2*(Recall * Precision) / (Recall + Precision)*
+F1 Score = 2(Recall * Precision) / (Recall + Precision)
+
+## Random Forest Classifier Performance Report
 
 
 ## Logistic Regression
