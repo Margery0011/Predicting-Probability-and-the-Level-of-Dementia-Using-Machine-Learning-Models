@@ -136,7 +136,15 @@ For Female, dementia is prevalent in 70 years of Age.Most of the cases happens g
 
 It is basically a balanced data which does not need re-sample
 
+## Train_Test_Split
 
+```
+X_bi = np.asarray(data_bi[['Age','Educ','SES','MMSE','eTIV','nWBV','Gender']])
+Y_bi = np.asarray(data_bi['CDR'])
+validation_size = 0.20
+seed = 42
+X_train_bi, X_validation_bi, Y_train_bi, Y_validation_bi = train_test_split(X_bi, Y_bi, test_size=validation_size, random_state=seed)
+```
 ## Algorithem Comparison
 
 ### cross_val_score
@@ -197,10 +205,34 @@ plt.show()
 
 #### Other paramters
 
+**GridSearcgCV()**
+
+It is Exhaustive search method.
+
+After we created a list of hyperparameters dictionary , it will find the optimal paramters among all candidate parameter choices, by looping through, trying every possibility, then the best performing parameter is the final result. 
+
 ![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
+
 
 ### Performance
 
+**Model Evaluation Metrics**
+
+To evaluate performance ,  “f1 score” as this is a class imbalance problem using accuracy as a performance metrics is not good also, The formula for calculating the F1 score is as follows:
+
+F1 Score = 2*(Recall * Precision) / (Recall + Precision)
+
+Precision is the ratio of accurately predicted positive observations to the total predicted positive observations.
+
+Precision = TP/TP+FP
+
+Recall is the ratio of accurately predicted positive observations to all observations in actual class – yes.
+
+Recall = TP/TP+FN
+
+ 
+
+F1 Score is the weighted average of Precision and Recall. Therefore, this score takes both false positives and false negatives into account.
 ![image](https://user-images.githubusercontent.com/89502586/165407510-322ad932-a68f-4efe-8900-8beed17734ce.png)
 
 ![4171651014733_ pic](https://user-images.githubusercontent.com/89502586/165407572-b56ca5b4-621b-4103-b439-8d6a47636af7.jpg)
@@ -210,9 +242,21 @@ plt.show()
 
 ## Logistic Regression
 
+Logistic Regression is used to solve classification problems. Models are trained on historical labelled datasets and aim to predict which category new observations will belong to. Logistic regression is well suited when we need to predict a binary answer (only 2 possible values like yes or no).
+
+**Why Scale ?**
+
+- Make sure features are on a similar scale
+
+For example, if we were to make a regression on the population, the regression coefficients would differ considerably between the dimensions of "number" and "million"
+
 ![image](https://user-images.githubusercontent.com/89502586/165407836-f496773a-a0b5-4296-9f40-f9ebadf98c25.png)
 
 #### Find the best Threshold
+
+The output of a Logistic regression model is a probability. We can select a threshold value. If the probability is greater than this threshold value, the event is predicted positive otherwise it is predicted negative.
+
+In binary classification, when a model gives us a score instead of the prediction itself, we usually need to convert this score into a prediction applying a threshold, the default threshold for sklearn is 0.5
 
 ![image](https://user-images.githubusercontent.com/89502586/165407880-368c50ef-86d3-4188-8be6-00f5faa0d445.png)
 ![4181651015004_ pic](https://user-images.githubusercontent.com/89502586/165407964-c34f3c63-ddb1-4897-ac6f-226c4b2693db.jpg)
@@ -220,6 +264,7 @@ plt.show()
 
 
 ### Performance
+
 
 #### Default Threshold
 
