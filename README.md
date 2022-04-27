@@ -261,6 +261,10 @@ F1 Score = 2(Recall * Precision) / (Recall + Precision)
 ## Random Forest Classifier Performance Report
 
 
+![image](https://user-images.githubusercontent.com/89502586/165438086-a89ea735-f864-4854-ac59-6a8363b416da.png)
+
+![image](https://user-images.githubusercontent.com/89502586/165438099-f7174178-349c-412e-9368-31046f088ff2.png)
+
 ## Logistic Regression
 
 Logistic Regression is used to solve classification problems. Models are trained on historical labelled datasets and aim to predict which category new observations will belong to. Logistic regression is well suited when we need to predict a binary answer (only 2 possible values like yes or no).
@@ -284,7 +288,7 @@ In binary classification, when a model gives us a score instead of the predictio
 
 
 
-### Performance
+## Logistic Regression Performance Report
 
 
 #### Logistic Regression Classifier using Default Threshold
@@ -297,6 +301,7 @@ In binary classification, when a model gives us a score instead of the predictio
 ![image](https://user-images.githubusercontent.com/89502586/165408400-08f65cfe-3d06-474a-ac7e-55e4b07615a3.png)
 ![image](https://user-images.githubusercontent.com/89502586/165408411-0815dfd4-d45f-4853-b7ee-b21a3bd6914a.png)
 
+We can see that by tuning hyperparameters, we were able to improve the performance of our model since our F1 Score for the final model is higher than that of the base model.
 
 # Multi-labels Classification
 
