@@ -220,6 +220,7 @@ It is Exhaustive search method.After we created a list of hyperparameters dictio
 
 ![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
 
+Then build the classifier using the best parameters selected by grid search
 
 # Model Performance Evaluation
 
@@ -232,8 +233,7 @@ True negative (TN): Prediction is 0 and X is Non-Dementia, we want that too
 False positive (FP): Prediction is 1 and X is Non-Dementia, false alarm, bad
 False negative (FN): Prediction is 0 and X is Dementia, the worst
 
-![4201651030199_ pic](https://user-images.githubusercontent.com/89502586/165434244-72db8671-2710-40d5-861d-ce588368af84.jpg)
-
+![4201651030199_ pic](https://user-images.githubusercontent.com/89502586/165435584-d84e881f-f8ea-4527-9045-09e152a6df16.jpg)
 
 
 **Precision**
@@ -254,15 +254,6 @@ It is the harmonic mean of precision and recall. It takes both false positive an
 
 
 *F1 Score = 2*(Recall * Precision) / (Recall + Precision)*
-
- 
-
-
-![image](https://user-images.githubusercontent.com/89502586/165407510-322ad932-a68f-4efe-8900-8beed17734ce.png)
-
-![4171651014733_ pic](https://user-images.githubusercontent.com/89502586/165407572-b56ca5b4-621b-4103-b439-8d6a47636af7.jpg)
-
-![image](https://user-images.githubusercontent.com/89502586/165407612-7d1620be-6837-4c7a-b798-187b9cbb68b4.png)
 
 
 ## Logistic Regression
