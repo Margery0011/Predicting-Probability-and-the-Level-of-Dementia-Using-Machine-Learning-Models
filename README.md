@@ -173,6 +173,8 @@ plt.show();
 
 ## RandomForest Classifier Tuning
 
+Random forest is an ensemble tool which takes a subset of observations and a subset of variables to build a decision trees. It builds multiple such decision tree and amalgamate them together to get a more accurate and stable prediction.
+
 ### Find best n_estimator
 
 ```
@@ -234,7 +236,11 @@ plt.show()
 
 ## Imblanced Data
 ![image](https://user-images.githubusercontent.com/89502586/165408453-16cd788c-6085-4e0b-93df-16d95fdf502e.png)
+
 ### Oversample
+
+use Synthetic Minority Oversampling Technique(SMOTE) to accomplish oversample, the basic idea of the SMOTE algorithm is to analyze the minority class samples and artificially synthesize new samples based on the minority class samples to add to the dataset
+
 
 ```
 from imblearn.over_sampling import SMOTE
@@ -242,6 +248,8 @@ oversample =SMOTE()
 X_re,Y_re = oversample.fit_resample(X_train,Y_train)
 Y_reD = pd.DataFrame(Y_re, columns = ['CDR'])
 ```
+After re-sample, the distribution of data has become even
+![image](https://user-images.githubusercontent.com/89502586/165420339-6523dc2e-2e87-496f-86b3-5e428cddb652.png)
 
 ## Algorithem Comparison 
 ## Performance
