@@ -136,7 +136,11 @@ For Female, dementia is prevalent in 70 years of Age.Most of the cases happens g
 
 It is basically a balanced data which does not need re-sample
 
-## Train_Test_Split
+## Split Training dataset/ Test dataset
+
+Method: The original dataset is randomly divided into training set and validation set. This sample is divided into two parts according to the proportion of 80%~20%, 80% of the sample is used for training the model; 20% of the sample is used for model validation.
+
+![4221651032844_ pic](https://user-images.githubusercontent.com/89502586/165439282-85054c2f-1d03-4ae9-8ebe-88a86cb569d1.jpg)
 
 ```
 X_bi = np.asarray(data_bi[['Age','Educ','SES','MMSE','eTIV','nWBV','Gender']])
@@ -146,6 +150,18 @@ seed = 42
 X_train_bi, X_validation_bi, Y_train_bi, Y_validation_bi = train_test_split(X_bi, Y_bi, test_size=validation_size, random_state=seed)
 ```
 ## Algorithem Comparison
+
+**K-Fold Cross-Validation**
+
+![image](https://user-images.githubusercontent.com/89502586/165439616-c0709acb-9c77-44ae-81fa-020159c17c9b.png)
+
+- Divide the original data set into 3 parts
+- Each group uses one of them as the test set, and the remaining 2 (K-1) as the training set
+- The training set becomes K * D (D represents the number of data samples contained in each copy)
+- Finally, the average value of the classification rate obtained for k times is calculated as the real classification rate of the model or hypothesis function
+
+![image](https://user-images.githubusercontent.com/89502586/165440484-99f14b70-1be9-4d74-8663-7d67d559c35e.png)
+
 
 ### cross_val_score
 
@@ -178,6 +194,7 @@ plt.show();
 
 ![image](https://user-images.githubusercontent.com/89502586/165406555-bf6348d6-d2b0-490c-9455-9fd2de892e54.png)
 
+By comparing cross-validation score, I found that Random Forest and Logistic Regression classfiers perform better than others, so I am going to tune these two classifier
 
 ## RandomForest Classifier Tuning
 
@@ -305,13 +322,16 @@ We can see that by tuning hyperparameters, we were able to improve the performan
 
 # Multi-labels Classification
 
-## Imblanced Data
+## Imbalanced Data
+
+
 ![image](https://user-images.githubusercontent.com/89502586/165408453-16cd788c-6085-4e0b-93df-16d95fdf502e.png)
+
+This dataset is highly imbalanced, most cases are 0.0, so I need to oversample in order to get an even dataset
 
 ### Oversample
 
 use Synthetic Minority Oversampling Technique(SMOTE) to accomplish oversample, the basic idea of the SMOTE algorithm is to analyze the minority class samples and artificially synthesize new samples based on the minority class samples to add to the dataset
-
 
 ```
 from imblearn.over_sampling import SMOTE
@@ -320,9 +340,39 @@ X_re,Y_re = oversample.fit_resample(X_train,Y_train)
 Y_reD = pd.DataFrame(Y_re, columns = ['CDR'])
 ```
 After re-sample, the distribution of data has become even
+
 ![image](https://user-images.githubusercontent.com/89502586/165420339-6523dc2e-2e87-496f-86b3-5e428cddb652.png)
 
 ## Algorithem Comparison 
-## Performance
+
+### GridSearcv.best_score_ Comparison 
+
+![image](https://user-images.githubusercontent.com/89502586/165441174-63894d27-5aab-48fe-9455-782158c688ab.png)
+
+### Cross_val_score Comparison Visualization
+
+![image](https://user-images.githubusercontent.com/89502586/165441293-ebc51623-cd5a-40e0-87ab-92860983f7e5.png)
+
+### Best Classifier 
+
+![image](https://user-images.githubusercontent.com/89502586/165441361-52a10153-7c66-4207-ab7a-6d1daa36e734.png)
+
+### Performance
+
+![image](https://user-images.githubusercontent.com/89502586/165441376-e6ceadea-660e-4902-b702-4f4e6191cd14.png)
+
+0.0: High Precision, High recall
+0.5: High Precision, Low Recall
+1.0: Low Precision, High Recall
+
+
 ### Future  Study   
 
+For Binary classification:
+Increase the Recall and Decrease the False Negative prediction cases in Random Forest Classifier
+For Multi-label classification:
+Build a classifier target at separating 0.5 and 1.0  cases
+Use different Oversample methods like Borderline-SMOTE
+Overall:
+Find more data to train model
+Build other Classifiers by image data  
