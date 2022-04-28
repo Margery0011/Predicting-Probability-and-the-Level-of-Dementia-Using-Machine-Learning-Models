@@ -352,15 +352,18 @@ In binary classification, when a model gives us a score instead of the predictio
 
 ### Logistic Regression Classifier using Default Threshold
 
-![image](https://user-images.githubusercontent.com/89502586/165408103-51ecc7fc-1a3f-43fc-ae70-b3a03cc95ed1.png)
-![image](https://user-images.githubusercontent.com/89502586/165408114-359041fb-840a-4959-ab6f-0239be9b8f59.png)
+
+![image](https://user-images.githubusercontent.com/89502586/165808912-20ac13c5-2281-4523-885a-99dd5443b0b3.png)
+![image](https://user-images.githubusercontent.com/89502586/165808676-23475474-a5cc-4680-a66a-18c7e82f56d9.png)
+
 
 ### Logistic Regression Classifier using Chosen Threshold
 
-![image](https://user-images.githubusercontent.com/89502586/165408400-08f65cfe-3d06-474a-ac7e-55e4b07615a3.png)
-![image](https://user-images.githubusercontent.com/89502586/165408411-0815dfd4-d45f-4853-b7ee-b21a3bd6914a.png)
 
-We can see that by tuning hyperparameters, we were able to improve the performance of our model since our F1 Score for the final model is higher than that of the base model.
+![4611651166185_ pic](https://user-images.githubusercontent.com/89502586/165809633-96e62aa1-a110-4a69-abfe-b692db39a3d8.jpg)
+![image](https://user-images.githubusercontent.com/89502586/165809276-4590b026-67b4-4ef9-91b5-1f7208734594.png)
+
+Although there is not so much difference in the accuracy among 2 models, but the classifier after tuning threshold has better recall and less False Negative cases, so it is better when it comes to clinical diagnosis
 
 ### Choose Model : Recall or Precision ?
 
@@ -406,11 +409,10 @@ After re-sample, the distribution of data has become even
 
 ### GridSearcv.best_score_ Comparison 
 
-![image](https://user-images.githubusercontent.com/89502586/165441174-63894d27-5aab-48fe-9455-782158c688ab.png)
-
+![image](https://user-images.githubusercontent.com/89502586/165810996-2acf5670-eb0a-4f94-9637-edaa9655415e.png)
 ### Cross_val_score Comparison Visualization
 
-![image](https://user-images.githubusercontent.com/89502586/165441293-ebc51623-cd5a-40e0-87ab-92860983f7e5.png)
+![image](https://user-images.githubusercontent.com/89502586/165810698-a768f782-3a8d-4e7c-b3a7-4ed8e74e0e7b.png)
 
 **As the results say, random forest classifier performs best, so tune its hyparamters**
 
@@ -422,7 +424,10 @@ After Tuning hyparameters by GridSearch, I have gotten classifier with best perf
 
 ### Performance
 
-![image](https://user-images.githubusercontent.com/89502586/165441376-e6ceadea-660e-4902-b702-4f4e6191cd14.png)
+
+![image](https://user-images.githubusercontent.com/89502586/165812611-55e4a640-21c6-4b98-8775-1fefe5c795b0.png)
+
+![image](https://user-images.githubusercontent.com/89502586/165812756-3d9f28ad-2986-4ea0-a8cd-11d3e47c40d1.png)
 
 
 - Class 0.0: High Precision, High recall
@@ -431,7 +436,20 @@ After Tuning hyparameters by GridSearch, I have gotten classifier with best perf
 
 Class 0.0 has been separated well, Class 0.5 and Class 1.0 are not separated nicely, maybe need a new classifier to separated these two classes alone.
 
-### Future  Study   
+**Possible reason**
+
+- Few samples in these 2 classes
+- Invalid information introduced by oversample
+- The differences in these 2 classes are not significant
+# Summary 
+
+In this project, I divided it into a binary classification and a multi-label classification problem. The dataset has 608 samples in total. I used eight features to train these models and used CDR values as the targets. 
+
+For binary classification , after comparing different algorithms, I decided to tune the hypeparameters of random forest classifier and logistic regression classifier.For random forest classifier, the first step is to determine the "n_estimator", then tune other hyparamates by gridsearchcv(). As for Logistic Regression, decide which should be the best threshold.   
+
+For multi-label classification, I choose to tune the RF classifier after comparing the algorithm. As a result, Class 0.0 has been separated well, and Class 0.5 and Class 1.0 are not separated nicely.
+
+## Future  Study   
 
 For Binary classification:
 Increase the Recall and Decrease the False Negative prediction cases in Random Forest Classifier
