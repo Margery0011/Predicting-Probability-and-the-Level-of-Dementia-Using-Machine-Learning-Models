@@ -1,5 +1,5 @@
 # Predicting-Probability-and-the-Level-of-Dementia-Using-Machine-Learning-Models
-Dementia is a general term for a decline in mental ability severe enough to interfere with daily life. Clinical Dementia Rating Scale (CDR) is a global rating scale for staging patients diagnosed with dementia. In this project, I am using Cross-Sectional and longitudinal OASIS MRI structural and demographic data to train machine learning models to predict if and at what level an individual has dementia. This problem is formulated as a binary classification problem (CDR = 0 and CDR > 0) and a multiclass problem (CDR = 0, CDR = 0.5, CDR = 1).  
+Dementia is a general term for a decline in mental ability severe enough to interfere with daily life. Clinical Dementia Rating Scale (CDR) is a global rating scale for staging patients diagnosed with dementia. In this project, I am using Cross-Sectional and Longitudinal OASIS MRI structural and demographic data to train machine learning models to predict if and at what level an individual has dementia. This problem is formulated as a binary classification problem (CDR = 0 and CDR > 0) and a multiclass problem (CDR = 0, CDR = 0.5, CDR = 1).  
 
 # Background
 ### Dementia
@@ -11,7 +11,7 @@ CDR is a global rating scale for staging patients diagnosed with dementia. It ev
 
 # Dataset
 
-Combined Cross-Sectional and Longitudinal data  from OASIS  brain project (http://www.oasis-brains.org/) to train machine learning models
+Combined Cross-Sectional and Longitudinal data from OASIS brain project (http://www.oasis-brains.org/) to train machine learning models
 
 Cross-Sectional dataset consists of a cross-sectional collection for 436 persons including male and female.For each person, 3 to 4 T1-weighted MRI scans that were obtained in single scan sessions are included.
 Longitudinal dataset  consists of a longitudinal collection of 373 subjects aged 60 to 96. Each subject was scanned on two or more visits, here we only use their first visit result. 
@@ -74,8 +74,12 @@ data = pd.concat([cross_cp,long_cp])
   - Hand column: All right-handed, not representative
 - Missing values imputer
   - SES 
-  ![image](https://user-images.githubusercontent.com/89502586/165398389-62587e41-1e1e-4f41-ba7b-c6b9871b2b33.png)
-  Because SES is discrete data, so use "most_frequent as strategy , and MMSE is not normal distribution， so use "median" as strategy
+
+  - ![4541651116271_ pic](https://user-images.githubusercontent.com/89502586/165670241-da66277f-2263-48bf-964f-7e0f6c664435.jpg)
+
+  When the data is skewed, it is good to consider using the median value for replacing the missing values. Note that imputing missing data with median value can only be done with numerical. Imputing missing data with most_frequent values can be done with numerical and categorical data.
+  
+  Because SES is discrete data, so use "most_frequent as strategy , and MMSE is not normal distribution， so use "median" as strategy to do imputer 
   - MMSE
   ![image](https://user-images.githubusercontent.com/89502586/165398437-b79cda66-2532-4dcb-b5b0-650067707739.png)
 
@@ -95,7 +99,7 @@ imputer = SimpleImputer ( missing_values = np.nan,strategy='median')
 imputer.fit(data_cp[['MMSE']])
 data_cp[['MMSE']] = imputer.fit_transform(data_cp[['MMSE']])
 ```
-Change  "Gender" from categorical data to numerica data
+-  Change  "Gender" from categorical data to numerica data
 
 ```
 gender_map = {'M':0, 'F':1}
@@ -117,24 +121,26 @@ data_bi.loc[:,'CDR'] = data_bi.loc[:, 'CDR'].apply(lambda x: ClassDict[x])
 ```
 ## Data Explore
 
-#### Age Group & Dementia
+### Age Group & Dementia
 
 ![image](https://user-images.githubusercontent.com/89502586/165406754-591e9bfa-c521-409f-8487-4201a948b3c0.png)
 
 Majority of cases of Dementia are in the age group of 70-80 years (around 45%) while second most highest cases are in 80-90 years of age.
 
-#### Gender & Dementia
+### Gender & Dementia
 
 ![image](https://user-images.githubusercontent.com/89502586/165406003-65f9fd84-37c1-434c-af10-6dad0a47a990.png)
 
 For Male, most number of dementia cases are reported in the age of around 80 .
 For Female, dementia is prevalent in 70 years of Age.Most of the cases happens generally after 65 years of age
 
-#### Balanced / Imbalanced
+### Data Balance / Imbalance
+
+Data imbalance usually reflects an unequal distribution of classes within a dataset. If we train a binary classification model without fixing the imbalanced data , the model will be completely biased
 
 ![image](https://user-images.githubusercontent.com/89502586/165405749-2b8ce36d-8acb-4a5a-b7d5-703334df50f6.png)
 
-It is basically a balanced data which does not need re-sample
+Although it is not perfectly even, it is basically a balanced dataset which does not need resampling
 
 ## Split Training dataset/ Test dataset
 
@@ -151,7 +157,7 @@ X_train_bi, X_validation_bi, Y_train_bi, Y_validation_bi = train_test_split(X_bi
 ```
 ## Algorithem Comparison
 
-**K-Fold Cross-Validation**
+ **K-Fold Cross-Validation**
 
 ![image](https://user-images.githubusercontent.com/89502586/165439616-c0709acb-9c77-44ae-81fa-020159c17c9b.png)
 
@@ -162,8 +168,9 @@ X_train_bi, X_validation_bi, Y_train_bi, Y_validation_bi = train_test_split(X_bi
 
 ![image](https://user-images.githubusercontent.com/89502586/165440484-99f14b70-1be9-4d74-8663-7d67d559c35e.png)
 
+Here I choosed K = 3 to do cross validation. 
 
-### cross_val_score
+### cross val score
 
 ```
 models = []
@@ -200,7 +207,18 @@ By comparing cross-validation score, I found that Random Forest and Logistic Reg
 
 Random forest is an ensemble tool which takes a subset of observations and a subset of variables to build a decision trees. It builds multiple such decision tree and amalgamate them together to get a more accurate and stable prediction.
 
+### Decision Tree
+
+A decision tree is drawn upside down with its root at the top. The green circle represents a condition/internal node, based on which the tree splits into branches/ edges. The end of the branch that doesn’t split anymore is the decision/leaf.
+
+![4551651119196_ pic](https://user-images.githubusercontent.com/89502586/165675751-91363c30-7004-4341-8f00-f747315281de.jpg)
+
+
 ### Find best n_estimator
+
+- ***n_estimators-(integer)- Default=10***
+
+The number of trees your want to build within a Random Forest before aggregating the predictions. 
 
 ```
 scorel = []
@@ -222,7 +240,7 @@ plt.show()
 
 The figure shows that when n_estimator = 69 , the model can get best accuracy.
 
-#### Hyperparameter Optimization for the RandomForest Model
+### Hyperparameter Optimization for the RandomForest Model
 
 Use Grid Search to search optimal values for hyperparameters. To tune hyperparameters, follow the steps below:
 
@@ -239,6 +257,18 @@ It is Exhaustive search method.After we created a list of hyperparameters dictio
 
 ![4161651014505_ pic](https://user-images.githubusercontent.com/89502586/165407450-c3079dc0-ade8-4865-a30a-cd688c41bd0c.jpg)
 
+- ***criterion-(string)-Default =”gini”***
+
+Measures the quality of each split. It can either be “gini” or “entropy”. “gini” uses the Gini impurity while “entropy” makes the split based on the information gain.
+
+- ***max_depth-(integer or none)- Default=None***
+
+This selects how deep you want to make your decision trees, if set it as "None" means there is no limitation to  the depth of the subtree
+
+- ***min_samples_leaf-(integer, float)-Default=1***
+
+This parameter helps you determine minimum size of the end node of each decision tree. The end node is also known as a leaf.
+
 Then build the classifier using these best parameters selected by grid search.
 
 # Model Performance Evaluation
@@ -247,10 +277,10 @@ For Binary Classification, the output is either Non-Dementia (0) or Dementia (1)
 
 **Confusion Matrix**
 
-True positive (TP): Prediction is 1 and X is Dementia, we want that
-True negative (TN): Prediction is 0 and X is Non-Dementia, we want that too
-False positive (FP): Prediction is 1 and X is Non-Dementia, false alarm, bad
-False negative (FN): Prediction is 0 and X is Dementia, the worst
+- True positive (TP): Prediction is 1 and X is Dementia, we want that
+- True negative (TN): Prediction is 0 and X is Non-Dementia, we want that too
+- False positive (FP): Prediction is 1 and X is Non-Dementia, false alarm, bad
+- False negative (FN): Prediction is 0 and X is Dementia, the worst
 
 
 ![4211651032026_ pic_hd](https://user-images.githubusercontent.com/89502586/165437849-1afceb55-4b5c-4ae8-a145-fd8518802652.jpg)
@@ -282,6 +312,18 @@ F1 Score = 2(Recall * Precision) / (Recall + Precision)
 
 ![image](https://user-images.githubusercontent.com/89502586/165438099-f7174178-349c-412e-9368-31046f088ff2.png)
 
+### Result explain 
+
+- Тhe cell on row one, column one, contains the number of True Negatives (in our case, this cell contains the number of correctly predicted individual who does not have dementia ). The model truly predicts 59 of them.
+
+- Тhe cell on row one, column two, contains the number of False Positives (in our case, this cell contains the number of predicted as Non-Dementia , but actually is Dementia ). The model falsely predicts 14 real patients.
+
+-  Тhe cell on row two, column one, contains the number of False Negatives (in our case, this cell contains the number of predicted as Dementia , but actually is Non-Dementia ). The model falsely predicts 2 individuals.
+    
+- Тhe cell on row two, column two, contains the number of True Positives (in our case, this cell contains the number of correctly predicted Dementia that has Dementia ). The model truly predicts 47 samples
+
+
+
 ## Logistic Regression
 
 Logistic Regression is used to solve classification problems. Models are trained on historical labelled datasets and aim to predict which category new observations will belong to. Logistic regression is well suited when we need to predict a binary answer (only 2 possible values like yes or no).
@@ -308,17 +350,32 @@ In binary classification, when a model gives us a score instead of the predictio
 ## Logistic Regression Performance Report
 
 
-#### Logistic Regression Classifier using Default Threshold
+### Logistic Regression Classifier using Default Threshold
 
 ![image](https://user-images.githubusercontent.com/89502586/165408103-51ecc7fc-1a3f-43fc-ae70-b3a03cc95ed1.png)
 ![image](https://user-images.githubusercontent.com/89502586/165408114-359041fb-840a-4959-ab6f-0239be9b8f59.png)
 
-#### Logistic Regression Classifier using Chosen Threshold
+### Logistic Regression Classifier using Chosen Threshold
 
 ![image](https://user-images.githubusercontent.com/89502586/165408400-08f65cfe-3d06-474a-ac7e-55e4b07615a3.png)
 ![image](https://user-images.githubusercontent.com/89502586/165408411-0815dfd4-d45f-4853-b7ee-b21a3bd6914a.png)
 
 We can see that by tuning hyperparameters, we were able to improve the performance of our model since our F1 Score for the final model is higher than that of the base model.
+
+### Choose Model : Recall or Precision ?
+
+Which could be more tolerate ? 
+
+- “false negative" : tell ill people they are healthy?
+- “false positives”: tell healthy people they are ill?
+
+For me , I think false negative is not tolerable here.
+
+Recall tells us the prediction accuracy among only actual positives. It means how correct our prediction is among ill people. That matters in that case. 
+
+That is why we have to minimize false negatives which means we are trying to maximize **recall**. It can cost us lower accuracies, which is still sufficient. 
+
+So the classifier using chosen thershold would be better since the false negative cases have decreased. 
 
 # Multi-labels Classification
 
