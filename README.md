@@ -388,6 +388,8 @@ This dataset is highly imbalanced, most cases are 0.0, so I need to oversample i
 
 ### Oversample
 
+![4591651127243_ pic](https://user-images.githubusercontent.com/89502586/165691787-1fdebabb-4cab-430c-8ada-94b7dfd2d165.jpg)
+
 use Synthetic Minority Oversampling Technique(SMOTE) to accomplish oversample, the basic idea of the SMOTE algorithm is to analyze the minority class samples and artificially synthesize new samples based on the minority class samples to add to the dataset
 
 ```
@@ -410,7 +412,11 @@ After re-sample, the distribution of data has become even
 
 ![image](https://user-images.githubusercontent.com/89502586/165441293-ebc51623-cd5a-40e0-87ab-92860983f7e5.png)
 
+**As the results say, random forest classifier performs best, so tune its hyparamters**
+
 ### Best Classifier 
+
+After Tuning hyparameters by GridSearch, I have gotten classifier with best performance
 
 ![image](https://user-images.githubusercontent.com/89502586/165441361-52a10153-7c66-4207-ab7a-6d1daa36e734.png)
 
@@ -418,10 +424,12 @@ After re-sample, the distribution of data has become even
 
 ![image](https://user-images.githubusercontent.com/89502586/165441376-e6ceadea-660e-4902-b702-4f4e6191cd14.png)
 
-0.0: High Precision, High recall
-0.5: High Precision, Low Recall
-1.0: Low Precision, High Recall
 
+- Class 0.0: High Precision, High recall
+- Class 0.5: High Precision, Low Recall
+- Class 1.0: Low Precision, High Recall
+
+Class 0.0 has been separated well, Class 0.5 and Class 1.0 are not separated nicely, maybe need a new classifier to separated these two classes alone.
 
 ### Future  Study   
 
